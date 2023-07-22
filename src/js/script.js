@@ -1,10 +1,12 @@
 const GRID = document.querySelector(".grid")
 const SIZE_BTN = document.getElementById("size")
 const BORDER_BTN = document.getElementById("toggle-border")
-const SAVE_BTN = document.getElementById("save")
 const CLEAN_BTN = document.getElementById("clean")
+const SAVE_BTN = document.getElementById("save")
+const DOWNLOAD_ANCHOR = document.getElementById("download-link")
+let currentWidth = 16
 
-function setGrid(width = 16) {
+function setGrid(width) {
   GRID.innerHTML = ""
   GRID.setAttribute("style", `--grid-width: ${width};`)
 
@@ -24,7 +26,7 @@ function setGrid(width = 16) {
   })
 }
 
-setGrid()
+setGrid(currentWidth)
 
 SIZE_BTN.addEventListener("click", () => {
   let newSize = parseInt(prompt("Width should be between 16 and 100*"))
@@ -35,9 +37,28 @@ SIZE_BTN.addEventListener("click", () => {
     )
   }
 
+  currentWidth = newSize
   setGrid(newSize)
 })
 
 BORDER_BTN.addEventListener("click", () => {
   GRID.classList.toggle("border")
+})
+
+CLEAN_BTN.addEventListener("click", () => {
+  setGrid(currentWidth)
+})
+
+SAVE_BTN.addEventListener("click", () => {
+  html2canvas(GRID).then((canvas) => {
+    DOWNLOAD_ANCHOR.download = `${Date.now()}.png`
+    DOWNLOAD_ANCHOR.href = canvas.toDataURL("image/png")
+    DOWNLOAD_ANCHOR.click()
+
+    DOWNLOAD_ANCHOR.parentNode.classList.remove("hidden")
+
+    setTimeout(() => {
+      DOWNLOAD_ANCHOR.parentNode.classList.add("hidden")
+    }, 3 * 10 ** 4)
+  })
 })

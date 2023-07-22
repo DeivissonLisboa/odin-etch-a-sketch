@@ -6,6 +6,7 @@
 
     <link rel="stylesheet" href="src/css/style.css" />
     <script src="src/js/script.js" defer></script>
+    <script src="src/lib/html2canvas.min.js"></script>
 
     <title>Etch-a-Sketch</title>
   </head>
@@ -13,10 +14,16 @@
     <div class="container">
       <div class="grid border"></div>
       <div class="settings">
-        <button class="button" id="size">resize</button>
-        <button class="button" id="toggle-border">border</button>
-        <button class="button" id="save" disabled>save</button>
-        <button class="button" id="clean">clean</button>
+        <div>
+          <button class="button" id="size">resize</button>
+          <button class="button" id="toggle-border">border</button>
+          <button class="button" id="clean">clean</button>
+        </div>
+        <button class="button" id="save">save</button>
+        <small class="hidden"
+          >If the download don't start,
+          <a id="download-link" href="">click here</a>.</small
+        >
       </div>
     </div>
   </body>
