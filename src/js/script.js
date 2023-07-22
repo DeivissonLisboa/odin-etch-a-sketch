@@ -67,7 +67,9 @@ function setGrid(width) {
 }
 
 RESIZE_BTN.addEventListener("click", () => {
-  let newSize = parseInt(prompt("Width should be between 16 and 100*"))
+  let newSize = parseInt(
+    prompt("Width should be between 16 and 100.\nResize will clear the screen!")
+  )
 
   if (newSize < 16 || newSize > 100) {
     newSize = parseInt(
